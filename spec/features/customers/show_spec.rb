@@ -10,30 +10,33 @@ RSpec.describe "Story 1 - Costumer Show Page" do
     @larrys = Supermarket.create!(name: "Larry's Market", location: "56 Zoo Road")
 
     @banana = Item.create!(name: "Banana", price: 1, supermarket_id: @wholefoods.id)
-    @apple = Item.create!(name: "apple", price: 2, supermarket_id: @wholefoods.id))
+    @apple = Item.create!(name: "apple", price: 2, supermarket_id: @wholefoods.id)
     @shake = Item.create!(name: "Milk Shake", price: 4, supermarket_id: @moes.id)
-    @pasta = Item.create!(name: "Pasta", price: 3, supermarket_id: @larrys.id )
-    @cannoli = Item.create!(name: "Cannoli", price: 3, supermarket_id: @larrys.id )
-    @bread = Item.create!(name: "bread", price: 2, supermarket_id: @larrys.id )
+    @pasta = Item.create!(name: "Pasta", price: 3, supermarket_id: @larrys.id)
+    @cannoli = Item.create!(name: "Cannoli", price: 3, supermarket_id: @larrys.id)
+    @bread = Item.create!(name: "bread", price: 2, supermarket_id: @larrys.id)
   end
   
   describe "When I visit a customer show page" do
     before(:each)do
       visit ("/customers/#{@sam.id}")
-      
-      @sam.items << @bread << @shake
     end
-
+    
     it "displays the customer's name, And I see its a list of its items" do
-      # require 'pry';binding.pry
       expect(page).to have_content("#{@sam.name}")
     end
     
     
-    xit "including the item's name, price, and the name of the supermarket that it belongs to" do
+    it "including the item's name, price, and the name of the supermarket that it belongs to" do
+      @sam.items << @bread << @shake
+      @chocolate = @moes.items.create!(name: "Chocolate", price: 1)
+      @pie = @sam.items.create(name: "Pumpkin Pie", price: 7, supermarket_id: @moes.id)
+      @sam.items << @chocolate
+      # require 'pry';binding.pry
+      save_and_open_page
       expect(page).to have_content("#{@bread.name}")
       expect(page).to have_content("#{@bread.price}")
-      expect(page).to have_content("#{@bread.supermarket_id.name}")
+      # expect(page).to have_content("#{@bread.supermarket_id.name}")
 
       expect(page).to have_content("#{@shake.name}")      
     end

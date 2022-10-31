@@ -1,0 +1,11 @@
+<h2>Customer Show</h2>
+
+
+<%= @customer.name %>
+
+<% binding.pry %>
+
+  <% @customer.items.each do |item| %>
+    <p>Item: <%= item.name %>, Price: <%= item.price %></p>
+  <% end %>
+ 

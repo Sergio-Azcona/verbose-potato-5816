@@ -3,9 +3,8 @@
 
 <%= @customer.name %>
 
-<% binding.pry %>
-
   <% @customer.items.each do |item| %>
-    <p>Item: <%= item.name %>, Price: <%= item.price %></p>
-  <% end %>
+    <p>Item: <%= item.name %>, Price: <%= item.price %>, Store: <%= item.supermarket_id.name%></p>
+
+    <% end %>
  

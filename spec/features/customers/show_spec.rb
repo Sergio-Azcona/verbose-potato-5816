@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Story 1 - Costumer Show Page" do
+RSpec.describe "Costumer Show Page" do
   before (:each) do
     @sam = Customer.create!(name: "Sam")
     @billy = Customer.create!(name: "Billy")
@@ -32,11 +32,11 @@ RSpec.describe "Story 1 - Costumer Show Page" do
       @chocolate = @moes.items.create!(name: "Chocolate", price: 1)
       @pie = @sam.items.create(name: "Pumpkin Pie", price: 7, supermarket_id: @moes.id)
       @sam.items << @chocolate
-      # require 'pry';binding.pry
-      save_and_open_page
+      
+      # save_and_open_page
       expect(page).to have_content("#{@bread.name}")
       expect(page).to have_content("#{@bread.price}")
-      # expect(page).to have_content("#{@bread.supermarket_id.name}")
+      expect(page).to have_content("#{@bread.supermarket_id.name}")
 
       expect(page).to have_content("#{@shake.name}")      
     end
